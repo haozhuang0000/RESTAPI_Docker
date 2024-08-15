@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedding Model Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Embedding Models</h2>
+    <p>Embedding models are running.</p>
+    <p>Available models: <strong>NVEmbed</strong> and <strong>SciBertEmbed</strong>. Simply call them with their respective model name, for example: <code>'http://10.230.252.6:7777/api/SciBertEmbed'</code>.</p>
+
+    <h3>Sample Usage</h3>
+    <pre><code>
+import requests
+import json
+
+HOST = "http://localhost:7777"
+SUB = "/api/NVEmbed"
+URL = HOST + SUB
+
+data = {'input': ['how are you', 'i am good'], 'type': 'documents'}
+# data = {'input': 'how are you', 'type': 'query'}
+
+response = requests.post(URL, json=data, verify=False)
+response_data = response.json()
+print(json.dumps(response_data))
+
+</code></pre>
+
+</body>
+</html>
