@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  nvembed:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nvembed
+    ports:
+      - "9998:5000"
+    volumes:
+      - /mnt/data/zhuanghao/model_cache:/mnt/data/zhuanghao/model_cache
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # nvembed_alt:
+  #   image: restapi_docker-nvembed  # Reuse image built from `nvembed`
+  #   container_name: nvembed_alt
+  #   ports:
+  #     - "9999:5000"  # Different host port
+  #   volumes:
+  #     - /data/zhuanghao/model_cache_alt:/data/zhuanghao/model_cache  # Different volume if needed
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_DRIVER_CAPABILITIES=all
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -f http://localhost:5000/healthz || exit 1"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 5s
