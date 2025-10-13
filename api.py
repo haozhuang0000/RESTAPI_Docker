@@ -19,7 +19,7 @@ ner = pipeline(
     device=0
 )
 # Login to Hugging Face
-login('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')
+login('XXXXXXXXXXXXXXXXXXXX')  # Replace with your actual token
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = "0, 1"

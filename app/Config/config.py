@@ -1,6 +1,6 @@
 import torch
 
-huggingface_token='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'
+huggingface_token='XXXXXXXXXXXXXXXXXXXX'  # Replace with your actual token
 batch_size = 8
 model_kwargs = {'device': 'cuda', "trust_remote_code": True, "model_kwargs": {"torch_dtype": torch.bfloat16}}
 # need to update encode kwargs with prompt when embedding the query
